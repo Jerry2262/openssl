@@ -137,6 +137,7 @@ static unsigned long getauxval(unsigned long key)
 #  define HWCAP_CE_SHA1          (1 << 5)
 #  define HWCAP_CE_SHA256        (1 << 6)
 #  define HWCAP_CPUID            (1 << 11)
+#  define HWCAP_SHA3             (1 << 17)
 #  define HWCAP_CE_SHA512        (1 << 21)
 # endif
 
@@ -208,6 +209,9 @@ void OPENSSL_cpuid_setup(void)
         if (hwcap & HWCAP_CE_SHA512)
             OPENSSL_armcap_P |= ARMV8_SHA512;
 
+        if (hwcap & HWCAP_SHA3)
+            OPENSSL_armcap_P |= ARMV8_SHA3;
+
         if (hwcap & HWCAP_CPUID)
             OPENSSL_armcap_P |= ARMV8_CPUID;
 #  endif
@@ -275,6 +279,9 @@ void OPENSSL_cpuid_setup(void)
         (OPENSSL_armcap_P & ARMV7_NEON)) {
             OPENSSL_armv8_rsa_neonized = 1;
     }
+    if (MIDR_IS_CPU_MODEL(OPENSSL_arm_midr, HISI_CPU_IMP, HISI_CPU_PART_KP950) &&
+        (OPENSSL_armcap_P & ARMV8_SHA3))
+        OPENSSL_armcap_P |= ARMV8_UNROLL8_EOR3;
 # endif
 }
 #endif
