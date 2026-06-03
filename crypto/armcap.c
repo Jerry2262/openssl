@@ -279,7 +279,8 @@ void OPENSSL_cpuid_setup(void)
         (OPENSSL_armcap_P & ARMV7_NEON)) {
             OPENSSL_armv8_rsa_neonized = 1;
     }
-    if (MIDR_IS_CPU_MODEL(OPENSSL_arm_midr, HISI_CPU_IMP, HISI_CPU_PART_KP950) &&
+    if ((MIDR_IS_CPU_MODEL(OPENSSL_arm_midr, HISI_CPU_IMP, HISI_CPU_PART_KP920C) ||
+         MIDR_IS_CPU_MODEL(OPENSSL_arm_midr, HISI_CPU_IMP, HISI_CPU_PART_KP950)) &&
         (OPENSSL_armcap_P & ARMV8_SHA3))
         OPENSSL_armcap_P |= ARMV8_UNROLL8_EOR3;
 # endif

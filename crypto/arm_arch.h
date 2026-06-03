@@ -96,6 +96,7 @@ extern unsigned int OPENSSL_armv8_rsa_neonized;
 
 # define ARM_CPU_PART_CORTEX_A72   0xD08
 # define ARM_CPU_PART_N1           0xD0C
+# define HISI_CPU_PART_KP920C      0xD03
 # define HISI_CPU_PART_KP950       0xD06
 
 # define MIDR_PARTNUM_SHIFT       4
